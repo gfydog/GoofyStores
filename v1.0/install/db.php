@@ -105,7 +105,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `file_url`, `image`, `created_at`, `category_id`) VALUES
-(1, 'Taller - Goofy Stores - PDF', 'Diseñadores gráficos, escritores, músicos y otros profesionales creativos que desean monetizar su contenido digital aprenderán cómo hacer su tienda en línea de bienes digitales utilizando Goofy Stores', 14.50, '6532d6b3b8e688.68210364.pdf', '', '2023-10-20 19:36:19', 1);
+(1, 'Curso Completo - CMS Goofy Stores - PDF', 'Diseñadores gráficos, escritores, músicos y otros profesionales creativos que desean monetizar su contenido digital aprenderán cómo hacer su tienda en línea de bienes digitales utilizando Goofy Stores', 14.50, '6532d6b3b8e688.68210364.pdf', '', '2023-10-20 19:36:19', 1);
 
 -- --------------------------------------------------------
 
