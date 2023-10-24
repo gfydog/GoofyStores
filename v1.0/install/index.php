@@ -7,7 +7,8 @@
 
 // Process the installation form if it is submitted.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $root = $_POST['root'];
+    $root = $_POST['root']; 
+    $shortURL = str_replace(array("http:", "https:"), "", $root);
     $dbHost = $_POST['dbHost']; // Customize with your database server.
     $dbUsername = $_POST['dbUsername']; // Customize with your database username.
     $dbPassword = $_POST['dbPassword']; // Customize with your database password.
@@ -31,10 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         require_once 'db.php';
 
         if ($conn->multi_query($query)) {
+            
             // Create a configuration file with the provided data (customize the name and content according to your needs).
             $configFileContent = <<<EOD
 <?php
 define("ROOT", '$root');
+define("SHORTROOT", '$shortURL');
 \$servername = '$dbHost';
 \$username = '$dbUsername';
 \$password = '$dbPassword';

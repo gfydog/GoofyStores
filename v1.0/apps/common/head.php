@@ -11,10 +11,10 @@
   <meta property="og:title" content="<?= htmlspecialchars(TITLE) ?>" />
   <meta property="og:description" content="<?= $storeData['description'] ?>" />
   <meta property="og:image" content="<?php
-                                      if (empty($storeData['image'])) {
-                                        echo ROOT . "assets/images/logo.png";
+                                      if (!empty($storeData['image'])) {
+                                        echo SHORTROOT . "assets/images/" . $storeData['image'];
                                       } else {
-                                        echo ROOT . "assets/images/" . $storeData['image'];
+                                        echo SHORTROOT . "assets/images/logo.png";
                                       }
                                       ?>" />
 
@@ -24,17 +24,17 @@
   <meta name="twitter:title" content="<?= htmlspecialchars(TITLE) ?>">
   <meta name="twitter:description" content="<?= $storeData['description'] ?>">
   <meta name="twitter:image" content="<?php
-                                      if (empty($storeData['image'])) {
-                                        echo ROOT . "assets/images/logo.png";
+                                      if (!empty($storeData['image'])) {
+                                        echo SHORTROOT . "assets/images/" . $storeData['image'];
                                       } else {
-                                        echo ROOT . "assets/images/" . $storeData['image'];
+                                        echo SHORTROOT . "assets/images/logo.png";
                                       }
                                       ?>"/>
 
   <link rel="icon" type="image/png" href="<?php
-                                          if (empty($storeData['icon'])) {
-                                            echo ROOT . "assets/images/logo.png";
+                                          if (!empty($storeData['icon'])) {
+                                            echo SHORTROOT . "assets/images/" . $storeData['icon'];
                                           } else {
-                                            echo ROOT . "assets/images/" . $storeData['icon'];
+                                            echo SHORTROOT . "assets/images/logo.png";
                                           }
                                           ?>" /> 

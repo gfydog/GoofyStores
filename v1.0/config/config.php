@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT * FROM configurations LIMIT 1";
+$sql = "SELECT * FROM configurations where id = 1";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
