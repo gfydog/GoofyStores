@@ -16,6 +16,33 @@ SET time_zone = \"+00:00\";
 -- Base de datos: `nueva1`
 --
 
+CREATE TABLE `comments` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `post_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `content` TEXT NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `uploaded_images` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `filename` VARCHAR(255) NOT NULL,
+  `upload_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `news` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `title` VARCHAR(255) NOT NULL,
+  `content` TEXT NOT NULL,
+  `publication_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `author` VARCHAR(100) NOT NULL,
+  `category` VARCHAR(50),
+  `tags` VARCHAR(255),
+  `main_image` VARCHAR(255),
+  `is_featured` BOOLEAN DEFAULT FALSE,
+  `status` VARCHAR(20) DEFAULT 'active'
+);
+
 -- --------------------------------------------------------
 
 --
@@ -327,4 +354,7 @@ ALTER TABLE `reviews`
 ALTER TABLE `users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
+
+ALTER TABLE `configurations`
+ADD `home` VARCHAR(255) NOT NULL DEFAULT './apps/public/index.php' AFTER `icon`;
 ";

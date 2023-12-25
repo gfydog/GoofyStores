@@ -31,7 +31,8 @@ try {
         $iconSrc,
         $keywords,
         $image,
-        $icon
+        $icon,
+        $home
     );
 
     // Olvidaste fetchear los resultados
@@ -50,7 +51,8 @@ try {
             'icon_src' => $iconSrc,
             'keywords' => $keywords,
             'image' => $image,
-            'icon' => $icon
+            'icon' => $icon,
+            'home' => $home
         ];
     }
 
@@ -128,6 +130,12 @@ try {
 
         <label for="icon">Icono:</label>
         <input type="file" name="icon" id="icon"><br>
+
+        <label for="home">Página de inicio:</label>
+        <select name="home" required>
+            <option value="./apps/public/index.php" <?php echo ($configurations['home'] == './apps/public/index.php') ? 'selected' : ''; ?>>index.php</option>
+            <option value="./apps/public/news.php" <?php echo ($configurations['home'] == './apps/public/news.php') ? 'selected' : ''; ?>>news.php</option>
+        </select><br>
 
         <button type="submit">Guardar configuración</button>
     </form>

@@ -99,7 +99,7 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- Review section for authenticated users -->
     <?php if (isset($user_id)) { ?>
-        <section class="review-section">
+        <section class="pdc-section">
             <a name="review"></a>
             <?php
             if (isset($_SESSION['user_id'])) {
@@ -125,7 +125,7 @@ if (isset($_SESSION['user_id'])) {
         </section>
 
         <!-- Display product reviews -->
-        <section class="reviews-display">
+        <section class="pdc-display">
             <h2>Reviews</h2>
             <?php
             $sql = "SELECT reviews.*, users.username FROM reviews JOIN users ON reviews.user_id = users.id WHERE product_id = ? ORDER BY date DESC";
@@ -136,10 +136,10 @@ if (isset($_SESSION['user_id'])) {
 
             if ($result->num_rows > 0) {
                 while ($review = $result->fetch_assoc()) {
-                    echo "<div class='review-box'>";
+                    echo "<div class='pdc-box'>";
                     echo "<h3>@" . $review['username'] . "</h3>";
                     echo "<p><strong>Rating:</strong> " . htmlspecialchars($review['rating'], ENT_QUOTES, 'UTF-8') . "/5</p>";
-                    echo "<p class='review-text'>" . htmlspecialchars($review['review'], ENT_QUOTES, 'UTF-8') . "</p>";
+                    echo "<p class='pdc-text'>" . htmlspecialchars($review['review'], ENT_QUOTES, 'UTF-8') . "</p>";
                     echo "</div>";
                 }
             } else {

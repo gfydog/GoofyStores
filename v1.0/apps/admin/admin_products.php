@@ -1,17 +1,4 @@
 <?php
-/**
- * PHP script for managing and displaying product administration in the admin interface.
- *
- * This script checks if an admin is logged in and retrieves a list of products from a backend system.
- * It then displays the products in a tabular format on the admin interface, allowing admins to edit or delete them.
- *
- * PHP version 7
- *
- * @category Admin_Products
- * @package  Admin_Interface
- * @author   Your Name
- */
-
 // Start a PHP session.
 session_start();
 

@@ -93,7 +93,7 @@ if (isset($_SESSION['user_id'])) {
   <?php } ?>
 
   <!-- Product listings section -->
-  <section id="products" class="productos"></section>
+  <section id="products" class="bxs"></section>
   <div id="pagination"></div>
 
   <!-- Admin site link -->
@@ -117,7 +117,7 @@ if (isset($_SESSION['user_id'])) {
           console.log(data);
           var productsHTML = "";
           for (var i = 0; i < data.products.length; i++) {
-            productsHTML += '<article class="producto">';
+            productsHTML += '<article class="bx">';
             productsHTML += '<a href="product.php?id=' + data.products[i].id + '">';
             productsHTML += "<img src='../../product_images/" + data.products[i].images[0]['image'] + "'>";
             productsHTML += "<h2>" + data.products[i].name + "</h2>";

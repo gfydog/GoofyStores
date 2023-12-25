@@ -14,7 +14,7 @@ $newURL = './versions/new.zip'; // The path to the file on your server.
 
 function ext($url) {
     $zipFile = $url; // Path to the ZIP file you want to extract
-    $extractTo = './data/'; // Path to the directory where you want to extract the files
+    $extractTo = './'; // Path to the directory where you want to extract the files
 
     $zip = new ZipArchive();
 
@@ -23,8 +23,8 @@ function ext($url) {
         $zip->close();
         echo 'The ZIP file has been successfully extracted to ' . $extractTo;
 
-        if (file_exists($extractTo . 'update.php')) {
-            header("Location: " . $extractTo . 'update.php');
+        if (file_exists($extractTo . 'data/update.php')) {
+            header("Location: " . $extractTo . 'data/update.php');
         } else {
             echo 'The update.php file was not found in the update.';
         }
@@ -42,8 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } elseif (isset($_GET['descargar'])) {
     // Process file download from the Internet
-
-    require_once "./url.php";
+    $url = "https://goofy.dog/goofy/download/new.zip";
 
     if (file_put_contents($newURL, file_get_contents($url))) {
         echo 'The file has been downloaded successfully.';

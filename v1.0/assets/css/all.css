@@ -19,6 +19,7 @@ body {
   color: #666;
   margin: 0;
   padding: 0;
+  min-width: 320px;
 }
 
 a {
@@ -250,30 +251,33 @@ select {
 }
 
 /* Estilo para la sección de productos en pantalla grande */
-.productos {
+.bxs {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 20px;
+  min-width: 320px;
 }
 
 /* Estilo para el artículo de producto */
-.producto {
+.bx {
   position: relative;
   background-color: #ddd; /* Color de fondo vintage */
   border-radius: 10px; /* Esquinas redondeadas */
   padding: 20px;
   text-align: center;
   margin: 10px;
-  width: 25%;
+  width: 80%;
+  max-width: 25%;
+  min-width: 300px;
   transition: transform 0.2s ease; /* Efecto de transformación suave al pasar el ratón */
 }
 
-.producto:hover {
+.bx:hover {
   transform: scale(1.05); /* Aumenta el tamaño del producto al pasar el ratón */
 }
 
-.producto img {
+.bx img {
   max-width: 100%;
   height: 300px;
   border-radius: 5px; /* Esquinas redondeadas para la imagen */
@@ -281,20 +285,20 @@ select {
   object-fit: contain;
 }
 
-.producto h2 {
+.bx h2 {
   font-size: 20px;
   margin: 10px 0;
   color: #666; /* Color del título */
 }
 
-.producto p {
+.bx p {
   font-size: 16px;
   margin-bottom: 60px;
   font-weight: bold;
   color: #999;
 }
 
-.producto button {
+.bx button {
   background-color: #00457C; /* Color del botón */
   color: #fff; /* Color del texto del botón */
   border: none;
@@ -311,7 +315,7 @@ select {
   font-weight: bold;
 }
 
-.producto button:hover {
+.bx button:hover {
   background-color: #0079C1; /* Color del botón al pasar el ratón */
 }
 
@@ -557,13 +561,13 @@ td {
   font-weight: bold;
 }
 
-.review-section {
+.pdc-section {
   width: 80%;
   padding: 20px 10%;
   background-color: #333;
 }
 
-.review-section h2 {
+.pdc-section h2 {
   font-family: "Segoe UI", Tahoma, sans-serif; /* Fuente similar a la de Windows 11 */
   color: #fff; /* Color de texto blanco */
   margin-bottom: 20px;
@@ -616,44 +620,44 @@ td {
   color: #aa8d7b;
 }
 
-.reviews-display {
+.pdc-display {
   background-color: #f0f0f0; /* Fondo oscuro para mostrar comentarios */
   padding: 30px 20px;
 }
 
-.reviews-display h2 {
+.pdc-display h2 {
   font-family: "Segoe UI", Tahoma, sans-serif; /* Fuente similar a la de Windows 11 */
   color: #222; /* Color de texto blanco */
   margin-bottom: 20px;
 }
 
-.review-box {
+.pdc-box {
   background-color: #666; /* Fondo oscuro para las cajas de comentarios */
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 15px;
 }
 
-.review-box h3 {
+.pdc-box h3 {
   font-family: "Segoe UI", Tahoma, sans-serif; /* Fuente similar a la de Windows 11 */
   color: #fff; /* Color de texto blanco */
   margin-bottom: 10px;
   font-size: 1.2em;
 }
 
-.review-box p {
+.pdc-box p {
   font-size: 1em;
   margin-bottom: 8px;
   color: #FFF; /* Color de texto gris claro */
 }
 
-.review-text {
+.pdc-text {
   font-style: italic;
   font-family: "Segoe UI", Tahoma, sans-serif; /* Fuente similar a la de Windows 11 */
   color: #FFF;
 }
 
-.review-box p em {
+.pdc-box p em {
   font-style: italic;
   color: #00457C; /* Color personalizado para resaltar texto */
 }

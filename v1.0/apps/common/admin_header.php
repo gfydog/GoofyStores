@@ -12,16 +12,20 @@
     <div>
         <ul>
             <!-- Store link -->
-            <li><a href="<?= ROOT . "apps/public/" ?>">Store</a></li>
+            <li><a href="<?= ROOT ?>">WEB</a></li>
 
             <!-- Conditional section for admin actions -->
             <?php if (isset($_SESSION['admin_id'])) { ?>
+                <!-- Admin Products link -->
+                <li><a href="<?= ROOT . "apps/news/" ?>">News</a></li>
                 <!-- Admin Products link -->
                 <li><a href="<?= ROOT . "apps/admin/" ?>admin_products.php">Products</a></li>
                 <!-- Admin Orders link -->
                 <li><a href="<?= ROOT . "apps/admin/" ?>admin_orders.php">Orders</a></li>
                 <!-- All Files link -->
                 <li><a href="<?= ROOT . "apps/admin/" ?>all_files.php">Files</a></li>
+
+                <li><a target="_blank" href="<?= ROOT . "apps/gallery/" ?>">Gallery</a></li>
                 <!-- Admin Data link -->
                 <li><a href="<?= ROOT . "apps/admin/" ?>admin_data.php">Settings</a></li>
                 <!-- Manage Categories link -->

@@ -84,15 +84,16 @@ try {
                 icon_src = ?,
                 keywords = ?,
                 image = ?,
-                icon = ?
+                icon = ?,
+                home = ?
             WHERE id = 1
         ");
     } else {
         // If no row exists, insert a new one.
         $stmt = $conn->prepare("
             INSERT INTO configurations (
-                TITLE, STYLE, PAYPAL_SANDBOX, PAYPAL_CLIENT_ID, PAYPAL_SECRET, short_name, description, background_color, theme_color, icon_src, keywords, image, icon
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                TITLE, STYLE, PAYPAL_SANDBOX, PAYPAL_CLIENT_ID, PAYPAL_SECRET, short_name, description, background_color, theme_color, icon_src, keywords, image, icon, home
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
     }
 
@@ -106,6 +107,13 @@ try {
     $description = isset($_POST['description']) ? $_POST['description'] : '';
     $background_color = isset($_POST['background_color']) ? $_POST['background_color'] : '#ffffff';
     $theme_color = isset($_POST['theme_color']) ? $_POST['theme_color'] : '#333';
+
+    $home = './apps/public/index.php';
+    if(isset($_POST['home'])){
+        if($_POST['home'] == './apps/public/news.php'){
+            $home = './apps/public/news.php';
+        }
+    }
 
     $previousIconSrc = isset($_POST['previousIconSrc']) ? $_POST['previousIconSrc'] : '';
 
@@ -147,7 +155,7 @@ try {
         $icon_src = $previousIconSrc; // Keep the previous icon source file if no new one is uploaded
     }
 
-    $stmt->bind_param("ssissssssssss", $TITLE, $STYLE, $PAYPAL_SANDBOX, $PAYPAL_CLIENT_ID, $PAYPAL_SECRET, $short_name, $description, $background_color, $theme_color, $icon_src, $keywords, $image, $icon);
+    $stmt->bind_param("ssisssssssssss", $TITLE, $STYLE, $PAYPAL_SANDBOX, $PAYPAL_CLIENT_ID, $PAYPAL_SECRET, $short_name, $description, $background_color, $theme_color, $icon_src, $keywords, $image, $icon, $home);
 
     // Execute the query to insert or update configuration settings.
     $stmt->execute();

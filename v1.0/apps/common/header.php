@@ -1,13 +1,86 @@
-<?php if (STYLE === "0") { ?>
+<style>
+    @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
-    <header>
-        <a href="<?= ROOT . "apps/public/" ?>">
+    body {
+        margin: 0;
+    }
+
+    nav {
+        background-color: #FFF;
+        text-align: center;
+        padding: 10px 0;
+        overflow: auto;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline-flex;
+        /* Hace que los elementos <li> se comporten como inline-flex */
+        margin: 5px;
+        /* Espacio entre elementos (ajusta según sea necesario) */
+    }
+
+    nav ul li:last-child {
+        margin-right: 0;
+        /* Elimina el margen derecho del último elemento para evitar espacio extra */
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #666;
+        font-size: 14px;
+        transition: color 0.2s ease;
+        background-color: #DDD;
+        padding: 5px 10px;
+        margin: 5px;
+        border-radius: 20px;
+        font-weight: bold;
+        min-width: 100px;
+    }
+
+    nav ul li a:hover {
+        background-color: #00457C;
+        color: #FFF;
+    }
+
+    .cart-btn {
+        background-color: #00457C;
+        color: #fff;
+    }
+
+    .cart-btn:hover {
+        background-color: #FFF;
+        color: #999;
+    }
+
+    .hdrt h1 {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        letter-spacing: 2px;
+        font-size: 48px;
+        color: #FFF;
+    }
+</style>
+<?php if (STYLE === "0") { ?>
+    <div class="hdrt">
+
+        <!--Content before waves-->
+        <div class="inner-header flex">
             <h1><?= htmlspecialchars(TITLE) ?></h1>
-        </a>
-    </header>
+        </div>
+    </div>
+
     <nav>
         <div>
             <ul>
+                <!-- Store link -->
+                <li><a href="<?= ROOT . "apps/public/" ?>">Store</a></li>
+                <li><a href="<?= ROOT . "apps/public/news.php" ?>">News</a></li>
+                
                 <?php if (!isset($_SESSION['user_id'])) { ?>
                     <!-- Display links for users who are not logged in -->
                     <li><a href="<?= ROOT . "apps/authentication/" ?>login.php">Log In</a></li>
@@ -26,10 +99,9 @@
         </div>
     </nav>
 
-
     <style>
         /* Estilo para el encabezado (header) */
-        header {
+        .hdrt {
             color: #999;
             text-align: center;
             padding: 20px;
@@ -48,6 +120,7 @@
                     #333);
             background-size: 40px 40px;
             animation: moveBackground 45s linear infinite;
+            width: 100%;
         }
 
         @keyframes moveBackground {
@@ -59,71 +132,11 @@
                 background-position: 100% 100%;
             }
         }
-
-        header h1 {
-            font-size: 36px;
-            margin: 0;
-            padding: 0;
-            color: #FFF;
-        }
-
-        nav {
-            background-color: #666;
-            /* Fondo gris oscuro más claro */
-            text-align: center;
-            padding: 10px 0;
-            overflow: auto;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline-flex;
-            /* Hace que los elementos <li> se comporten como inline-flex */
-            margin: 5px;
-            /* Espacio entre elementos (ajusta según sea necesario) */
-        }
-
-        nav ul li:last-child {
-            margin-right: 0;
-            /* Elimina el margen derecho del último elemento para evitar espacio extra */
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 14px;
-            transition: color 0.2s ease;
-            background-color: #999;
-            padding: 5px 10px;
-            margin: 5px;
-            border-radius: 20px;
-            font-weight: bold;
-            min-width: 100px;
-        }
-
-        nav ul li a:hover {
-            background-color: #00457C;
-            /* Color de enlace al pasar el ratón */
-        }
-
-        .cart-btn {
-            background-color: #00457C;
-            color: #fff;
-        }
-
-        .cart-btn:hover {
-            background-color: #FFF;
-            color: #999;
-        }
     </style>
 
 <?php } else 
 if (STYLE === "1") { ?>
-    <div class="header">
+    <div class="hdrt">
 
         <!--Content before waves-->
         <div class="inner-header flex">
@@ -152,7 +165,8 @@ if (STYLE === "1") { ?>
         <div>
             <ul>
                 <!-- Store link -->
-                <li><a href="<?= ROOT . "apps/public/" ?>">Home</a></li>
+                <li><a href="<?= ROOT . "apps/public/" ?>">Store</a></li>
+                <li><a href="<?= ROOT . "apps/public/news.php" ?>">News</a></li>
 
                 <?php if (!isset($_SESSION['user_id'])) { ?>
                     <!-- Display links for users who are not logged in -->
@@ -173,19 +187,6 @@ if (STYLE === "1") { ?>
     </nav>
 
     <style>
-        @import url(//fonts.googleapis.com/css?family=Lato:300:400);
-
-        body {
-            margin: 0;
-        }
-
-        h1 {
-            font-family: 'Lato', sans-serif;
-            font-weight: 300;
-            letter-spacing: 2px;
-            font-size: 48px;
-        }
-
         p {
             font-family: 'Lato', sans-serif;
             letter-spacing: 1px;
@@ -193,7 +194,7 @@ if (STYLE === "1") { ?>
             color: #333333;
         }
 
-        .header {
+        .hdrt {
             position: relative;
             text-align: center;
             background: linear-gradient(60deg, #8C52FF 0%, #FF914D 100%);
@@ -228,7 +229,7 @@ if (STYLE === "1") { ?>
             position: relative;
             width: 100%;
             height: 15vh;
-            margin-bottom: -7px;
+            margin-bottom: -10px;
             /*Fix for safari gap*/
             min-height: 50px;
             max-height: 150px;
