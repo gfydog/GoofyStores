@@ -20,6 +20,7 @@ require "../../config/database.php";
 require "../../config/config.php";
 
 // Check if the user is logged in.
+$user_id = "-1";
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
@@ -33,38 +34,75 @@ if (!isset($_GET['id'])) {
 // Get the file ID from the URL and ensure it's an integer.
 $file_id = intval($_GET['id']);
 
-// SQL query to retrieve purchase and file information.
-$sql = "SELECT p.*, pf.* FROM purchase_files pf
-        JOIN purchases p ON pf.purchase_id = p.id
-        WHERE p.user_id = ? AND pf.file_id = ?";
+// Check if free parameter is set and the price is 0 or 0.00
+if (isset($_GET["free"])) {
+    // Retrieve the product price from the database.
+    $sql_price = "SELECT price FROM products WHERE id = ?";
+    $stmt_price = $conn->prepare($sql_price);
+    $stmt_price->bind_param("i", $file_id);
+    $stmt_price->execute();
+    $result_price = $stmt_price->get_result();
 
-// Prepare the SQL statement.
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $user_id, $file_id);
-$stmt->execute();
+    if ($result_price->num_rows > 0) {
+        $product_price = $result_price->fetch_assoc()['price'];
 
-// Get the result set.
-$result = $stmt->get_result();
-
-// Check if the user has access or if an admin is logged in.
-if ($result->num_rows > 0 || isset($_SESSION['admin_id'])) {
-
-    // SQL query to retrieve the file URL.
-    $sql = "SELECT p.file_url FROM products p WHERE p.id = ?";
+        // Check if the price is 0 or 0.00
+        if ($product_price == 0 || $product_price == 0.00) {
+            // Proceed to download the file.
+            downloadFile($file_id, $conn);
+        } else {
+            $message = "You do not have access to this file. Product not free.";
+        }
+    } else {
+        $message = "You do not have access to this file. Product not found.";
+    }
+} else if($user_id != "-1"){
+    // Proceed with the existing logic for purchased files.
+    // SQL query to retrieve purchase and file information.
+    $sql_purchase = "SELECT p.*, pf.* FROM purchase_files pf
+            JOIN purchases p ON pf.purchase_id = p.id
+            WHERE p.user_id = ? AND pf.file_id = ?";
 
     // Prepare the SQL statement.
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $file_id);
-    $stmt->execute();
+    $stmt_purchase = $conn->prepare($sql_purchase);
+    $stmt_purchase->bind_param("ii", $user_id, $file_id);
+    $stmt_purchase->execute();
 
     // Get the result set.
-    $result = $stmt->get_result();
+    $result_purchase = $stmt_purchase->get_result();
+
+    if ($result_purchase->num_rows > 0) {
+        // File has been purchased.
+        downloadFile($file_id, $conn);
+    } else {
+        $message = "You do not have access to this file.";
+    }
+}else {
+  $message = "Ups! You do not have access to this file.";
+}
+
+// Close the database connection.
+$conn->close();
+
+// Function to download the file.
+function downloadFile($file_id, $conn)
+{
+    // SQL query to retrieve the file URL.
+    $sql_file = "SELECT file_url FROM products WHERE id = ?";
+
+    // Prepare the SQL statement.
+    $stmt_file = $conn->prepare($sql_file);
+    $stmt_file->bind_param("i", $file_id);
+    $stmt_file->execute();
+
+    // Get the result set.
+    $result_file = $stmt_file->get_result();
 
     // Check if the file exists or an admin is logged in.
-    if ($result->num_rows > 0 || isset($_SESSION['admin_id'])) {
+    if ($result_file->num_rows > 0) {
 
         // Fetch the product information.
-        $product = $result->fetch_assoc();
+        $product = $result_file->fetch_assoc();
         $file_url = "../../files/" . $product['file_url'];
 
         // Get the original file name.
@@ -86,12 +124,7 @@ if ($result->num_rows > 0 || isset($_SESSION['admin_id'])) {
     } else {
         $message =  "File not found.";
     }
-} else {
-    $message = "You do not have access to this file.";
 }
-
-// Close the database connection.
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="es">

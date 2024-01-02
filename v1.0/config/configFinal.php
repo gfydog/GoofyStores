@@ -1,7 +1,7 @@
 <?php
-define("ROOT", 'http://localhost/GoofyStoreRespaldos/v1.0/');
-define("SHORTROOT", '//localhost/GoofyStoreRespaldos/v1.0/');
+define("ROOT", 'http://localhost/GoofyStores/GoofyStores/v1.0/');
+define("SHORTROOT", '//localhost/GoofyStores/GoofyStores/v1.0/');
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'pruebanews';
+$dbname = 'prueba1';

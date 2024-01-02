@@ -49,8 +49,8 @@ if (isset($_SESSION['user_id'])) {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
-      margin: 20px;
-      min-width: 320px;
+      margin: 20px auto;
+      min-width: 300px;
     }
 
     article.bx {

@@ -66,7 +66,9 @@ if (isset($_SESSION['user_id'])) {
                 echo "<p class='product-price'>Price: $" . htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8') . "</p>";
 
                 // Display "Add to Cart" button for authenticated users
-                if (isset($user_id)) {
+                if($product['price'] == 0){
+                    echo "<a href='../account/download.php?id=" . $product['id'] . "&free'><button class='retro-button'>Download</button></a>";
+                }else if (isset($user_id)) {
                     echo "<button class='retro-button' onclick=\"addToCart(" . $product['id'] . ")\">Add to Cart</button>";
                 } else {
                     echo "<a href='../authentication/login.php'><button class='retro-button'>Login</button></a>";

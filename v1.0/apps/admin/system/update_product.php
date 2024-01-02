@@ -27,11 +27,11 @@ require "../../../config/config.php";
 $product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
 $name = isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : "";
 $description = isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8') : "";
-$price = isset($_POST['price']) ? floatval($_POST['price']) : 0.0;
+$price = isset($_POST['price']) ? floatval($_POST['price']) : 0.00;
 $category_id = intval($_POST['category_id']);
 
 // Check if the provided data is valid.
-if ($product_id <= 0 || empty($name) || empty($description) || $price <= 0) {
+if ($product_id <= 0 || empty($name) || empty($description) || $price < 0) {
     echo json_encode(['success' => false]);
     exit;
 }

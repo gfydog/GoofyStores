@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 
 if (!isset($_SESSION['admin_id'])) {
@@ -81,9 +82,33 @@ try {
     copyDirectory($sourceDirectory, $destinationDirectory);
 
     unlink("../versions/new.zip");
+
+    function deleteDir($dir) {
+        if (is_dir($dir)) {
+            $files = glob($dir . '/*');
+            foreach ($files as $file) {
+                if (is_dir($file)) {
+                    deleteDir($file);
+                } else {
+                    unlink($file);
+                }
+            }
+            rmdir($dir);
+            echo "Carpeta borrada correctamente: $dir\n";
+        } else {
+            echo "La carpeta no existe: $dir\n";
+        }
+    }
+    
+    deleteDir("../data/");
+
+    if (!file_exists("../data/")) {
+        mkdir("../data/", 0755, true);
+    }
+
     unlink("../../update.php");
     header("Location: ../../welcome.php");
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
-}
+}*/
 ?>

@@ -39,6 +39,7 @@ try {
     if ($stmt->execute()) {
         $response = ['success' => true];
         echo json_encode($response);
+        header("location: ../index.php");
     } else {
         throw new Exception("Error executing SQL statement: " . $stmt->error);
     }
@@ -50,4 +51,3 @@ try {
 
 // Close the database connection.
 $conn->close();
-header("location: ../index.php");

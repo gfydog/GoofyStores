@@ -255,8 +255,8 @@ select {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin: 20px;
-  min-width: 320px;
+  margin: 20px auto;
+  min-width: 300px;
 }
 
 /* Estilo para el artículo de producto */
@@ -269,7 +269,7 @@ select {
   margin: 10px;
   width: 80%;
   max-width: 25%;
-  min-width: 300px;
+  min-width: 280px;
   transition: transform 0.2s ease; /* Efecto de transformación suave al pasar el ratón */
 }
 

@@ -123,11 +123,15 @@ if (isset($_SESSION['user_id'])) {
             productsHTML += "<h2>" + data.products[i].name + "</h2>";
             productsHTML += '</a>';
             productsHTML += "<p>$" + data.products[i].price + "</p>";
-            <?php if (isset($user_id)) { ?>
-              productsHTML += "<button onclick=\"addToCart(" + data.products[i].id + ")\">Add to Cart</button>";
-            <?php } else { ?>
-              productsHTML += "<a href='../authentication/login.php'><button>Login</button></a>";
-            <?php } ?>
+            if(data.products[i].price == 0){
+              productsHTML += "<a href='../account/download.php?id=" + data.products[i].id + "&free'><button>Download</button></a>";
+            }else{
+              <?php if(isset($user_id)) { ?>
+                productsHTML += "<button onclick=\"addToCart(" + data.products[i].id + ")\">Add to Cart</button>";
+              <?php } else { ?>
+                productsHTML += "<a href='../authentication/login.php'><button>Login</button></a>";
+              <?php } ?>
+            }
             productsHTML += "</article>";
           }
           $("#products").html(productsHTML);
