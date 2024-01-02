@@ -32,7 +32,7 @@ if (!isset($_GET['next'])) {
         // Insert the default administrator data into the `admin` table.
         $insertAdminSql = "INSERT INTO `admin` (`username`, `password`, `email`) VALUES ('$adminUsername', '$hashedPassword', '$adminEmail')";
         if ($conn->query($insertAdminSql) === TRUE) {
-            deleteInstallFolder();
+            //deleteInstallFolder();
             header('Location: ../welcome.php');
             exit;
         } else {
@@ -44,7 +44,7 @@ if (!isset($_GET['next'])) {
     }
 } else {
     if ($rowCount > 0) {
-        deleteInstallFolder();
+        //deleteInstallFolder();
         header('Location: ../welcome.php');
         exit;
     }
