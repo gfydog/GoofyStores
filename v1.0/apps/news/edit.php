@@ -68,6 +68,13 @@ $conn->close();
         <input type="hidden" name="news_id" value="<?php echo $newsId; ?>">
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" value="<?php echo $newsDetails['title']; ?>" required><br>
+        
+        <label for="content">Url Image:</label>
+        <input type="text" name="image" id="image" value="<?php echo $newsDetails['image']; ?>" required><br>
+
+        <label for="description">Short Description:</label>
+        <input type="text" name="description" id="description"><br>
+
         <label for="content">Content (HTML):</label>
         <div style="border: 1px solid #333;">
             <textarea name="content" id="content"><?php echo $newsDetails['content']; ?></textarea>

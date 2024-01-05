@@ -12,7 +12,7 @@ $limit = 12;
 $offset = ($page - 1) * $limit;
 
 // Build the SQL query for news retrieval
-$sql = "SELECT id, title, author, status, publication_date FROM news
+$sql = "SELECT id, title, image, description, author, status, publication_date FROM news
         WHERE (title LIKE ? OR content LIKE ?)";
 
 $sql .= " ORDER BY publication_date DESC";
@@ -33,6 +33,8 @@ while ($row = $result->fetch_assoc()) {
         'id' => $row['id'],
         'title' => htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'),
         'author' => htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'),
+        'image' => htmlspecialchars($row['image'], ENT_QUOTES, 'UTF-8'),
+        'description' => htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'),
         'status' => $row['status'],
         'publication_date' => $row['publication_date']
     ];

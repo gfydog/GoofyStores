@@ -24,6 +24,8 @@ if (!file_exists($target_dir)) {
 // Get news information from POST data.
 $title = htmlspecialchars($_POST['title']);
 $content = sanitizeHtml($_POST['content']);
+$image = htmlspecialchars($_POST['image']);
+$description = htmlspecialchars($_POST['description']);
 
 $author = htmlspecialchars($_POST['author']);
 $category = "";  // Considerar cómo manejar la categoría
@@ -31,9 +33,9 @@ $tags = htmlspecialchars($_POST['tags']);
 $is_featured = isset($_POST['is_featured']) ? 1 : 0;
 
 // Insert news details into the database.
-$sql = "INSERT INTO news (title, content, author, category, tags, main_image, is_featured) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO news (title, content, image, description, author, category, tags, main_image, is_featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssi", $title, $content, $author, $category, $tags, $new_main_image_name, $is_featured);
+$stmt->bind_param("ssssssssi", $title, $content, $image, $description, $author, $category, $tags, $new_main_image_name, $is_featured);
 
 try {
     if ($stmt->execute()) {

@@ -25,15 +25,18 @@ if (!file_exists($target_dir)) {
 $news_id = $_POST['news_id'];
 $title = htmlspecialchars($_POST['title']);
 $content = sanitizeHtml($_POST['content']);
+$image = htmlspecialchars($_POST['image']);
+$description = htmlspecialchars($_POST['description']);
+
 $author = htmlspecialchars($_POST['author']);
 $category = "";  // Considerar cómo manejar la categoría
 $tags = htmlspecialchars($_POST['tags']);
 $is_featured = isset($_POST['is_featured']) ? 1 : 0;
 
 // Update news details in the database.
-$sql = "UPDATE news SET title=?, content=?, author=?, category=?, tags=?, is_featured=? WHERE id=?";
+$sql = "UPDATE news SET title=?, content=?, image=?, description=?, author=?, category=?, tags=?, is_featured=? WHERE id=?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssi", $title, $content, $author, $category, $tags, $is_featured, $news_id);
+$stmt->bind_param("ssssssssi", $title, $content, $image, $description, $author, $category, $tags, $is_featured, $news_id);
 
 try {
     if ($stmt->execute()) {

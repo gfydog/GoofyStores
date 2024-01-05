@@ -14,6 +14,13 @@
 // Start a PHP session.
 session_start();
 
+// Check if an admin is logged in, redirect to admin login page if not.
+$admin = false;
+if (isset($_SESSION['admin_id'])) {
+  $admin = true;
+}
+
+
 // Require configuration files.
 require "../../config/configFinal.php";
 require "../../config/database.php";
@@ -56,7 +63,7 @@ if (isset($_GET["free"])) {
     } else {
         $message = "You do not have access to this file. Product not found.";
     }
-} else if($user_id != "-1"){
+} else if($user_id != "-1" || $admin){
     // Proceed with the existing logic for purchased files.
     // SQL query to retrieve purchase and file information.
     $sql_purchase = "SELECT p.*, pf.* FROM purchase_files pf
@@ -71,7 +78,7 @@ if (isset($_GET["free"])) {
     // Get the result set.
     $result_purchase = $stmt_purchase->get_result();
 
-    if ($result_purchase->num_rows > 0) {
+    if ($result_purchase->num_rows > 0  || $admin) {
         // File has been purchased.
         downloadFile($file_id, $conn);
     } else {

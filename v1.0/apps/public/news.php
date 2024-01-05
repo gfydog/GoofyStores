@@ -45,39 +45,71 @@ if (isset($_SESSION['user_id'])) {
 
   <!-- Additional Styles for nytimes.com-like design -->
   <style>
-    section.bxs {
-      display: flex;
+    .bxs {
+      width: 100%;
+      display: inline-flex;
+      flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-evenly;
-      margin: 20px auto;
-      min-width: 300px;
+
     }
 
-    article.bx {
-      width: calc(33.333% - 20px);
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .bxNews {
+      width: 48%;
+      margin: 50px auto;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease-in-out;
+      display: flex;
+      flex-direction: row;
     }
 
-    article.bx:hover {
-      transform: scale(1.05);
+    .bxNews:hover {
+      transform: scale(1.03);
     }
 
-    article.bx a {
-      text-decoration: none;
-      color: #333;
-    }
-
-    article.bx h2 {
+    .bxNews h2 {
       font-size: 1.5rem;
       margin-bottom: 10px;
+      text-align: left;
     }
 
-    article.bx p {
+    .bxNews p {
       margin: 0;
       color: #777;
     }
+
+    .bxNews img {
+      width: 130px;
+      height: 130px;
+      /* Establece la altura igual a la anchura */
+      object-fit: cover;
+      /* Mantiene la proporción y cubre el contenedor */
+    }
+
+    .bxNews .text-container {
+      margin: 15px;
+      flex: 1;
+      /* Ocupa el espacio restante disponible */
+    }
+
+    @media (max-width: 640px) {
+    .bxs {
+      flex-direction: column; /* Cambia a disposición de columna */
+    }
+
+    .bxNews {
+      width: 80%;
+      margin: 15px auto;
+      flex-direction: column;
+    }
+
+    .bxNews img {
+      width: 100%; /* Ocupa el 100% del ancho del contenedor */
+      height: auto;
+      max-height: 300px;
+      margin-right: 0; /* No hay margen derecho en pantallas más pequeñas */
+      margin-bottom: 10px; /* Añade un margen inferior para separar la imagen del texto */
+    }
+  }
 
     #pagination {
       margin-top: 20px;
@@ -123,27 +155,26 @@ if (isset($_SESSION['user_id'])) {
   </div>
 
   <script>
+    function getDate(timestamp) {
+      // Array con los nombres de los meses en español
+      const meses = [
+        'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+      ];
 
-function getDate(timestamp) {
-  // Array con los nombres de los meses en español
-  const meses = [
-    'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-  ];
+      // Crear un objeto de fecha a partir del timestamp
+      const fecha = new Date(timestamp);
 
-  // Crear un objeto de fecha a partir del timestamp
-  const fecha = new Date(timestamp);
+      // Obtener el día, mes y año
+      const dia = fecha.getDate();
+      const numeroMes = fecha.getMonth() + 1; // Los meses en JavaScript van de 0 a 11
+      const ano = fecha.getFullYear();
 
-  // Obtener el día, mes y año
-  const dia = fecha.getDate();
-  const numeroMes = fecha.getMonth() + 1; // Los meses en JavaScript van de 0 a 11
-  const ano = fecha.getFullYear();
+      // Construir la cadena de fecha traducida
+      const fechaTraducida = `${dia} de ${meses[numeroMes - 1]}, ${ano}`;
 
-  // Construir la cadena de fecha traducida
-  const fechaTraducida = `${dia} de ${meses[numeroMes - 1]}, ${ano}`;
-
-  return fechaTraducida;
-}
+      return fechaTraducida;
+    }
 
     // Function to load news based on filters
     function loadNews(search = '', page = 1) {
@@ -158,13 +189,17 @@ function getDate(timestamp) {
           console.log(data);
           var newsHTML = "";
           for (var i = 0; i < data.news.length; i++) {
-            newsHTML += '<article class="bx">';
-            newsHTML += '<a href="news_article.php?id=' + data.news[i].id + '">';
+            newsHTML += '<a href="news_article.php?id=' + data.news[i].id + '" class="bxNews">';
+            if (data.news[i].image != "") {
+              newsHTML += "<img src='" + data.news[i].image + "'>";
+            }
+            newsHTML += "<div class='text-container'>";
+
             newsHTML += "<h2>" + data.news[i].title + "</h2>";
             newsHTML += "<p>" + data.news[i].author + "</p>";
             newsHTML += "<p>" + getDate(data.news[i].publication_date) + "</p>";
+            newsHTML += "</div>"
             newsHTML += '</a>';
-            newsHTML += "</article>";
           }
           $("#news").html(newsHTML);
 
@@ -200,4 +235,5 @@ function getDate(timestamp) {
   <!-- Include common customBox script -->
   <?php require_once '../common/customBox.php'; ?>
 </body>
+
 </html>

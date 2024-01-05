@@ -33,6 +33,13 @@ require "../../config/config.php";
     <form action="./system/new.php" method="post">
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" required><br>
+
+        <label for="content">Url Image:</label>
+        <input type="text" name="image" id="image" required><br>
+
+        <label for="description">Short Description:</label>
+        <input type="text" name="description" id="description"><br>
+
         <label for="content">Content (HTML):</label>
         <div style="border: 1px solid #333;">
         <textarea name="content" id="content"><hdr>
@@ -76,7 +83,7 @@ require "../../config/config.php";
   }
 
   hdr {
-    color: #fff;
+    color: #111;
     padding: 10px;
     text-align: center;
   }
