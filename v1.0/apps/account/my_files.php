@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This PHP script retrieves a list of user-specific files and displays them on a web page.
  * It first checks if the user is logged in, then queries the database to fetch file information
@@ -85,16 +86,15 @@ $conn->close();
 <body>
     <?php require_once '../common/header.php'; ?>
 
-    <section id="products" class="productos">
+    <section id="products" class="bxs">
         <?php if (count($files) > 0) : ?>
             <?php foreach ($files as $file) : ?>
-                <article class="producto">
+                <article class="bx">
                     <a href="../public/product.php?id=<?php echo $file['file_id']; ?>">
-                        <img src="../../product_images/<?php echo $file['image']; ?>">
+                        <img src='../../product_images/<?php echo $file['image']; ?>'>
                         <h2><?php echo $file['name']; ?></h2>
                     </a>
                     <p></p>
-                    
                     <?php if (isset($user_id)) { ?>
                         <a href='download.php?id=<?php echo $file['file_id']; ?>'><button>Download</button></a>
                     <?php } ?>
@@ -107,4 +107,5 @@ $conn->close();
 
     <?php require_once '../common/customBox.php'; ?>
 </body>
+
 </html>
