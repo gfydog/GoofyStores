@@ -73,7 +73,7 @@ $conn->close();
         <input type="text" name="image" id="image" value="<?php echo $newsDetails['image']; ?>" required><br>
 
         <label for="description">Short Description:</label>
-        <input type="text" name="description" id="description"><br>
+        <input type="text" name="description" id="description"  value="<?php echo $newsDetails['description']; ?>" required><br>
 
         <label for="content">Content (HTML):</label>
         <div style="border: 1px solid #333;">

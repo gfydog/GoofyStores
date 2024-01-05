@@ -1,53 +1,7 @@
 <?php 
-$query = "-- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 22-10-2023 a las 23:19:00
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
-
-SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";
+$query = "SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";
 START TRANSACTION;
 SET time_zone = \"+00:00\";
-
---
--- Base de datos: `nueva1`
---
-
-CREATE TABLE `comments` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `post_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  `content` TEXT NOT NULL,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE `uploaded_images` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `filename` VARCHAR(255) NOT NULL,
-  `upload_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE `news` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `title` VARCHAR(255) NOT NULL,
-  `content` TEXT NOT NULL,
-  `publication_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `author` VARCHAR(100) NOT NULL,
-  `category` VARCHAR(50),
-  `tags` VARCHAR(255),
-  `main_image` VARCHAR(255),
-  `is_featured` BOOLEAN DEFAULT FALSE,
-  `status` VARCHAR(20) DEFAULT 'active'
-);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `admin`
---
 
 CREATE TABLE `admin` (
   `id` int(11) UNSIGNED NOT NULL,
@@ -56,12 +10,6 @@ CREATE TABLE `admin` (
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cart`
---
-
 CREATE TABLE `cart` (
   `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
@@ -69,29 +17,21 @@ CREATE TABLE `cart` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `categories`
---
-
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `categories`
---
-
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'e-books');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `configurations`
---
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `configurations` (
   `id` int(11) NOT NULL,
@@ -107,14 +47,24 @@ CREATE TABLE `configurations` (
   `icon_src` varchar(8) NOT NULL DEFAULT 'logo.png',
   `keywords` varchar(255) NOT NULL,
   `image` varchar(11) NOT NULL,
-  `icon` varchar(11) NOT NULL
+  `icon` varchar(11) NOT NULL,
+  `home` varchar(255) NOT NULL DEFAULT './apps/public/index.php'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `products`
---
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `publication_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `author` varchar(100) NOT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `main_image` varchar(255) DEFAULT NULL,
+  `is_featured` tinyint(1) DEFAULT 0,
+  `status` varchar(20) DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `products` (
   `id` int(11) UNSIGNED NOT NULL,
@@ -127,18 +77,8 @@ CREATE TABLE `products` (
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `products`
---
-
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `file_url`, `image`, `created_at`, `category_id`) VALUES
 (1, 'Curso Completo - CMS Goofy Stores - PDF', 'Diseñadores gráficos, escritores, músicos y otros profesionales creativos que desean monetizar su contenido digital aprenderán cómo hacer su tienda en línea de bienes digitales utilizando Goofy Stores', 14.50, '6532d6b3b8e688.68210364.pdf', '', '2023-10-20 19:36:19', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `product_images`
---
 
 CREATE TABLE `product_images` (
   `id` int(11) UNSIGNED NOT NULL,
@@ -146,18 +86,8 @@ CREATE TABLE `product_images` (
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `product_images`
---
-
 INSERT INTO `product_images` (`id`, `product_id`, `image`) VALUES
 (1, 1, '6532d6b3b8ab4.jpg');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `purchases`
---
 
 CREATE TABLE `purchases` (
   `id` int(11) NOT NULL,
@@ -166,24 +96,12 @@ CREATE TABLE `purchases` (
   `purchase_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `purchase_files`
---
-
 CREATE TABLE `purchase_files` (
   `id` int(11) NOT NULL,
   `purchase_id` int(11) NOT NULL,
   `file_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reviews`
---
 
 CREATE TABLE `reviews` (
   `id` int(11) UNSIGNED NOT NULL,
@@ -194,11 +112,11 @@ CREATE TABLE `reviews` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `users`
---
+CREATE TABLE `uploaded_images` (
+  `id` int(11) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `upload_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
@@ -207,154 +125,99 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `users`
---
-
 INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES
+
 (1, 'rgmendezr', '$2y$10\$btz88tt86k3c8Nq1XidoVu02kmaITG15jRo9i9FwTklFOPqKZON1m', 'raul301095@gmail.com');
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `admin`
---
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
---
--- Indices de la tabla `cart`
---
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `product_id` (`product_id`);
 
---
--- Indices de la tabla `categories`
---
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
---
--- Indices de la tabla `configurations`
---
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `configurations`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `products`
---
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `product_images`
---
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
 
---
--- Indices de la tabla `purchases`
---
 ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `purchase_files`
---
 ALTER TABLE `purchase_files`
   ADD PRIMARY KEY (`id`),
   ADD KEY `purchase_id` (`purchase_id`),
   ADD KEY `file_id` (`file_id`);
 
---
--- Indices de la tabla `reviews`
---
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `product_id` (`product_id`);
 
---
--- Indices de la tabla `users`
---
+ALTER TABLE `uploaded_images`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
 
---
--- AUTO_INCREMENT de la tabla `admin`
---
 ALTER TABLE `admin`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `cart`
---
 ALTER TABLE `cart`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `categories`
---
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `configurations`
---
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `configurations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `products`
---
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 ALTER TABLE `products`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `product_images`
---
 ALTER TABLE `product_images`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `purchases`
---
 ALTER TABLE `purchases`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `purchase_files`
---
 ALTER TABLE `purchase_files`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `reviews`
---
 ALTER TABLE `reviews`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `users`
---
+ALTER TABLE `uploaded_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
-
-ALTER TABLE `configurations`
-ADD `home` VARCHAR(255) NOT NULL DEFAULT './apps/public/index.php' AFTER `icon`;
 ";
