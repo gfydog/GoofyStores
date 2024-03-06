@@ -5,7 +5,7 @@ Welcome to Goofy Stores, an open source e-commerce solution specialized in digit
 
 ## Installation steps
 
-1. Download the .zip file from the [website](https://goofy.dog).
+1. Download the .zip file from the [website](https://gfy.dog).
 2. Extract it and upload it to your online store's destination folder on your server.
 3. Open your web browser and visit the final address.
 4. Complete the three installation steps: 1. Database 2. PayPal, and 3. Administrator Account Information.
@@ -25,7 +25,7 @@ Dare to join the project
 
 MIT
 
-Copyright (c) 2023, Raúl Méndez Rodríguez
+Copyright (c) 2024, Raúl Méndez Rodríguez
 
 See the [LICENSE](LICENSE) file for details
 
