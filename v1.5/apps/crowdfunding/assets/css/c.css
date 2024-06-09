@@ -1,0 +1,104 @@
+/* Estilo para la página de crowdfunding */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.hh1 {
+    text-align: left;
+    margin-top: 20px;
+    color: #333;
+}
+
+.campaigns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.campaign {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    width: 300px;
+}
+
+.campaign h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.campaign p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.campaign form {
+    display: flex;
+    flex-direction: column;
+}
+
+.campaign form input[type="number"] {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.campaign form input[type="submit"] {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.campaign form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.gfy-progress-bar {
+    width: 100%;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.gfy-progress {
+    height: 20px;
+    background-color: #4caf50;
+    transition: width 0.3s;
+}
+
+.donation-buttons {
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.donation-button {
+    background-color: #45a049;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.donation-button:last-child {
+    margin-right: 0;
+}
