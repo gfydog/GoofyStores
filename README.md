@@ -1,4 +1,4 @@
-# Goofy Stores v1.0
+# Goofy Stores v1.5
 
 Welcome to Goofy Stores, an open source e-commerce solution specialized in digital products developed by Goofy Technology Group, an organization founded by Raúl Méndez Rodríguez. Goofy Stores is designed to make it easy to set up and manage your online store.
 
